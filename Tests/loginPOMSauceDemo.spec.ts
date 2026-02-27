@@ -14,7 +14,7 @@ test.describe('saucedemoFunctionalities', () =>{
 
     })
 
-    test.only('User can log in with valid credentials', async ({page}) => {
+    test('User can log in with valid credentials', async ({page}) => {
         await homePage.inputUserName('standard_user')
         await homePage.inputPassword('secret_sauce')
         await homePage.clickOnLogin()
@@ -24,7 +24,7 @@ test.describe('saucedemoFunctionalities', () =>{
         await expect(itemsPage.shoppingCart).toBeVisible
     })
 
-    test.only('User can not login with invalid username', async ({page}) => {
+    test('User can not login with invalid username', async ({page}) => {
         await homePage.inputUserName('nostandard_user')
         await homePage.inputPassword('secret_sauce')
         await homePage.clickOnLogin()
@@ -33,27 +33,28 @@ test.describe('saucedemoFunctionalities', () =>{
         //await expect(homePage.loginButton).toBeVisible
     })
     test('User can logout', async ({page}) =>{
-        homePage.inputUserName('standard_user')
-        homePage.inputPassword('secret_sauce')
-        homePage.clickOnLogin
+        await homePage.inputUserName('standard_user')
+        await homePage.inputPassword('secret_sauce')
+        await homePage.clickOnLogin()
         await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html")
-        itemsPage.clickOnBurgerButton
-        itemsPage.clickOnLogoutButton
-        await expect(page).toHaveURL("https://www.saucedemo.com/")
+        await itemsPage.clickOnBurgerButton 
+        await itemsPage.clickOnLogoutButton
         const login = await page.locator('#login-button')      
         await expect(login).toBeVisible
         const shoppingCart = await page.locator('.shopping_cart_link')
         await expect(shoppingCart).not.toBeVisible
     })
-    test('User can add items into shopping cart' , async ({page}) => {
-        homePage.inputUserName('standard_user')
-        homePage.inputPassword('secret_sauce')
-        homePage.clickOnLogin
-        itemsPage.clickAddToCartBackpack
+    test.only('User can add items into shopping cart' , async ({page}) => {
+        await homePage.inputUserName('standard_user')
+        await homePage.inputPassword('secret_sauce')
+        await homePage.clickOnLogin()
+        await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html")
+        await itemsPage.clickAddToCartBackpack()
         const cartBadge = await page.locator('.shopping_cart_badge')
         await expect(cartBadge).toHaveText('1')
-        itemsPage.clickOnShoppingCartButton
-
+        await itemsPage.clickOnShoppingCartButton()
+        const inventoryItem = await page.locator('.inventory_item_name')
+        await expect(inventoryItem).toHaveText('Sauce Labs Backpack')
     })
 
 

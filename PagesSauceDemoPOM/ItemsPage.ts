@@ -24,16 +24,16 @@ export class ItemsPage{
     //-------------------------------------------
 
     async clickOnBurgerButton(){
-        this.burgerButton.click()
+        await this.burgerButton.click()
     }
     async clickOnLogoutButton(){
-        this.logoutButton.click()
+        await this.logoutButton.click()
     }
     async clickOnShoppingCartButton(){
-        this.shoppingCart.click()
+        await this.shoppingCart.click()
     }
     async clickAddToCartBackpack(){
-        this.backpackAddToCart.click()
+        await this.backpackAddToCart.click()
     }
 
 
