@@ -1,0 +1,20 @@
+{
+  "name": "playwrightproject",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tests:chrome": "npx playwright test --config=playwright.config.ts --project=chromium",
+    "tests:firefox": "npx playwright test --config=playwright.config.ts --project=Firefox",
+    "tests:webkit": "npx playwright test --config=playwright.config.ts --project=webkit",
+    "tests:all": "npx playwright test --config=playwright.config.ts --project=all --reporter=html"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.57.0",
+    "prettier": "^3.7.4"
+  }
+}
